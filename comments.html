@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Comments</title>
+    <link rel="stylesheet" href="comments.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🗣️ Share Your Thoughts</h1>
+
+      <form id="commentForm" class="comment-form">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <textarea
+          id="comment"
+          placeholder="Write your comment..."
+          required
+        ></textarea>
+        <button type="submit">Post Comment</button>
+      </form>
+
+      <h2 class="section-title">💬 All Comments</h2>
+      <div id="commentsContainer" class="comments-container"></div>
+    </div>
+
+    <!-- Back to Home link -->
+    <div class="back-links">
+      <a href="index.html" class="back-link">🏠 Back to Home</a>
+    </div>
+
+    <script>
+      document
+        .getElementById("commentForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value.trim();
+          const comment = document.getElementById("comment").value.trim();
+
+          if (name && comment) {
+            const commentBox = document.createElement("div");
+            commentBox.className = "comment";
+
+            const nameElem = document.createElement("div");
+            nameElem.className = "name";
+            nameElem.textContent = name;
+
+            const commentText = document.createElement("div");
+            commentText.className = "text";
+            commentText.textContent = comment;
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "🗑 Delete";
+            deleteBtn.className = "delete-btn";
+            deleteBtn.onclick = () => {
+              commentBox.remove();
+            };
+
+            commentBox.appendChild(nameElem);
+            commentBox.appendChild(commentText);
+            commentBox.appendChild(deleteBtn);
+
+            document
+              .getElementById("commentsContainer")
+              .appendChild(commentBox);
+
+            document.getElementById("commentForm").reset();
+          }
+        });
+    </script>
+  </body>
+</html>

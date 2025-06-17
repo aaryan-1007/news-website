@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News - IndiGo & Harvard</title>
+    <link rel="stylesheet" href="trending.css" />
+  </head>
+  <body>
+    <h2 class="page-title">Latest News</h2>
+
+    <!-- Search bar -->
+    <div class="search-container">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Search news articles..."
+        aria-label="Search news articles"
+      />
+    </div>
+
+    <!-- News Card 1 -->
+    <div class="news-card" data-id="1">
+      <img
+        src="https://c.ndtvimg.com/2025-05/0k049kqc_indigo-delhi-srinagar_625x300_21_May_25.jpg"
+        alt="IndiGo Pilot News"
+        class="news-image"
+      />
+      <div class="news-main">
+        <div class="news-content">
+          <h3>Pak Rejected IndiGo Pilot's Request To Use Its Airspace:</h3>
+          <p>
+            <strong>New Delhi/ Mumbai:</strong> An IndiGo pilot operating the
+            Delhi-Srinagar flight, which encountered a sudden hailstorm on
+            Wednesday, initially sought Lahore Air Traffic Control's permission
+            to briefly use the Pakistan airspace to avoid the turbulence, but
+            the request was rejected, sources said on Thursday.
+          </p>
+          <button class="read-btn" onclick="toggleReadAloud(this)">
+            🔊 Read Aloud
+          </button>
+        </div>
+        <div class="reaction-box">
+          <button class="reaction-btn like">👍 Like</button>
+          <button class="reaction-btn dislike">👎 Dislike</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- News Card 2 -->
+    <div class="news-card" data-id="2">
+      <img
+        src="https://c.ndtvimg.com/2025-04/kfelb8p8_harvard-university_625x300_30_April_25.jpeg"
+        alt="Harvard University News"
+        class="news-image"
+      />
+      <div class="news-main">
+        <div class="news-content">
+          <h3>
+            What Harvard Said On Trump Halting Its Ability To Enroll Foreign
+            Students
+          </h3>
+          <p>
+            <strong>Washington:</strong> Harvard University on Friday slammed
+            the Donald Trump administration for revoking its ability to enrol
+            international students, calling it "unlawful". According to the Ivy
+            League University, the US government's move is a retaliatory action
+            that threatens "serious harm" to the university.
+          </p>
+          <button class="read-btn" onclick="toggleReadAloud(this)">
+            🔊 Read Aloud
+          </button>
+        </div>
+        <div class="reaction-box">
+          <button class="reaction-btn like">👍 Like</button>
+          <button class="reaction-btn dislike">👎 Dislike</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Why was the IndiGo pilot's request rejected by Pakistan airspace
+          authorities?
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-answer">
+          Pakistan denied the IndiGo pilot’s request to use its airspace, likely
+          due to political or security reasons despite the turbulence avoidance
+          request.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          What is Harvard’s position on the US government's decision regarding
+          international students?
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-answer">
+          Harvard considers the US government’s move to revoke its ability to
+          enroll international students as unlawful and harmful to the
+          university.
+        </div>
+      </div>
+    </section>
+
+    <div class="back-links">
+      <a href="index.html" class="back-link">🏠 Back to Home</a>
+      <a href="economics.html" class="back-link">📊 Go to Economics</a>
+      <a href="sports.html" class="back-link">🏏 Go to Sports</a>
+    </div>
+
+    <script>
+      document.querySelectorAll(".faq-question").forEach((q) => {
+        q.addEventListener("click", () => {
+          q.parentElement.classList.toggle("active");
+        });
+      });
+
+      document.querySelectorAll(".news-card").forEach((card) => {
+        const id = card.dataset.id;
+        const likeBtn = card.querySelector(".like");
+        const dislikeBtn = card.querySelector(".dislike");
+
+        likeBtn.addEventListener("click", () => {
+          likeBtn.classList.toggle("active");
+          dislikeBtn.classList.remove("active");
+          localStorage.setItem(
+            `trending-${id}-like`,
+            likeBtn.classList.contains("active")
+          );
+          localStorage.removeItem(`trending-${id}-dislike`);
+        });
+
+        dislikeBtn.addEventListener("click", () => {
+          dislikeBtn.classList.toggle("active");
+          likeBtn.classList.remove("active");
+          localStorage.setItem(
+            `trending-${id}-dislike`,
+            dislikeBtn.classList.contains("active")
+          );
+          localStorage.removeItem(`trending-${id}-like`);
+        });
+
+        if (localStorage.getItem(`trending-${id}-like`) === "true")
+          likeBtn.classList.add("active");
+
+        if (localStorage.getItem(`trending-${id}-dislike`) === "true")
+          dislikeBtn.classList.add("active");
+      });
+
+      let currentUtterance = null;
+      function toggleReadAloud(button) {
+        const textElement = button.parentElement;
+        const text = textElement.innerText;
+
+        if (currentUtterance) {
+          speechSynthesis.cancel();
+          currentUtterance = null;
+          button.textContent = "🔊 Read Aloud";
+        } else {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.onend = () => {
+            currentUtterance = null;
+            button.textContent = "🔊 Read Aloud";
+          };
+          speechSynthesis.speak(utterance);
+          currentUtterance = utterance;
+          button.textContent = "⏹ Stop Reading";
+        }
+      }
+
+      const searchInput = document.getElementById("searchInput");
+      searchInput.addEventListener("input", function () {
+        const filter = searchInput.value.toLowerCase();
+        document.querySelectorAll(".news-card").forEach((card) => {
+          const title = card.querySelector("h3").textContent.toLowerCase();
+          const content = card.querySelector("p").textContent.toLowerCase();
+          card.style.display =
+            title.includes(filter) || content.includes(filter) ? "" : "none";
+        });
+      });
+    </script>
+  </body>
+</html>

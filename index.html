@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Read Aloud Button Style */
+      .read-btn {
+        margin-top: 10px;
+        background-color: #1e90ff;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .read-btn:hover {
+        background-color: #0d6efd;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="first">The Times Of India</h1>
+    <p id="date"></p>
+    <script>
+      const today = new Date();
+      document.getElementById("date").innerText = today.toDateString();
+    </script>
+
+    <hr />
+    <nav class="sections-menu">
+      <ul>
+        <li class="section-item">
+          <a href="trending.html">Trending <span class="arrow">▼</span></a>
+        </li>
+        <li class="section-item">
+          <a href="sports.html">Sports <span class="arrow">▼</span></a>
+        </li>
+        <li class="section-item">
+          <a href="economics.html">Economics <span class="arrow">▼</span></a>
+        </li>
+        <li class="section-item">
+          <a href="comments.html">Comments Page <span class="arrow">▼</span></a>
+        </li>
+      </ul>
+    </nav>
+
+    <h2 id="page">Front Page</h2>
+
+    <!-- Search Bar -->
+    <div class="search-bar-container">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search articles..."
+        class="search-bar"
+      />
+    </div>
+
+    <div class="news-container">
+      <!-- Article 1 -->
+      <div class="news-article">
+        <img
+          src="https://static.toiimg.com/thumb/imgsize-31746,msid-121197068,width-600,resizemode-4/121197068.jpg"
+          alt="Indus Treaty News"
+        />
+        <div class="news-text">
+          <h2>Indus treaty on hold till Pak stops exporting terror: EAM</h2>
+          <p>
+            New Delhi: External affairs minister S Jaishankar reiterated
+            Thursday that the only issue which remains to be discussed on
+            Kashmir is return of part of J&amp;K that is under the illegal
+            occupation of Pakistan (POK)...
+          </p>
+          <button class="read-btn">🔊 Read Aloud</button>
+        </div>
+        <div class="reaction-box" data-id="1">
+          <button class="reaction-btn like">👍 Like</button>
+          <button class="reaction-btn dislike">👎 Dislike</button>
+        </div>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="news-article">
+        <img
+          src="https://static.toiimg.com/thumb/imgsize-34684,msid-121197083,width-800,resizemode-4/121197083.jpg"
+          alt="Hyderabad Forest News"
+        />
+        <div class="news-text">
+          <h2>
+            Restore Hyd forest or be ready to go to jail, SC tells T’gana CS
+          </h2>
+          <p>
+            New Delhi: Reading the riot act to Telangana govt, Supreme Court on
+            Thursday said it would hold the state chief secretary and other
+            officials accountable...
+          </p>
+          <button class="read-btn">🔊 Read Aloud</button>
+        </div>
+        <div class="reaction-box" data-id="2">
+          <button class="reaction-btn like">👍 Like</button>
+          <button class="reaction-btn dislike">👎 Dislike</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">What is the Indus Waters Treaty?</button>
+        <div class="faq-answer">
+          <p>
+            The Indus Waters Treaty is a water-distribution agreement between
+            India and Pakistan, signed in 1960.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Why is the treaty on hold?</button>
+        <div class="faq-answer">
+          <p>
+            The treaty is currently on hold due to ongoing concerns about
+            cross-border terrorism and related disputes.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What does the Supreme Court say about the Hyderabad forest?
+        </button>
+        <div class="faq-answer">
+          <p>
+            The Supreme Court has warned Telangana officials to restore the
+            forest or face legal action, emphasizing afforestation within two
+            months.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Like/Dislike logic
+      document.querySelectorAll(".reaction-box").forEach((box) => {
+        const id = box.dataset.id;
+        const likeBtn = box.querySelector(".like");
+        const dislikeBtn = box.querySelector(".dislike");
+
+        likeBtn.addEventListener("click", () => {
+          likeBtn.classList.toggle("active");
+          dislikeBtn.classList.remove("active");
+          localStorage.setItem(
+            `article-${id}-like`,
+            likeBtn.classList.contains("active")
+          );
+          localStorage.removeItem(`article-${id}-dislike`);
+        });
+
+        dislikeBtn.addEventListener("click", () => {
+          dislikeBtn.classList.toggle("active");
+          likeBtn.classList.remove("active");
+          localStorage.setItem(
+            `article-${id}-dislike`,
+            dislikeBtn.classList.contains("active")
+          );
+          localStorage.removeItem(`article-${id}-like`);
+        });
+
+        if (localStorage.getItem(`article-${id}-like`) === "true") {
+          likeBtn.classList.add("active");
+        }
+        if (localStorage.getItem(`article-${id}-dislike`) === "true") {
+          dislikeBtn.classList.add("active");
+        }
+      });
+
+      // FAQ Toggle
+      document.querySelectorAll(".faq-question").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          btn.parentElement.classList.toggle("active");
+        });
+      });
+
+      // Search Function
+      document
+        .getElementById("search-input")
+        .addEventListener("input", function () {
+          const query = this.value.toLowerCase();
+          const articles = document.querySelectorAll(".news-article");
+
+          articles.forEach((article) => {
+            const text = article.innerText.toLowerCase();
+            article.style.display = text.includes(query) ? "flex" : "none";
+          });
+        });
+
+      // Voice Assistant (Read Aloud)
+      document.querySelectorAll(".read-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const container = btn.closest(".news-text");
+          const title = container.querySelector("h2").innerText;
+          const content = container.querySelector("p").innerText;
+          const message = `${title}. ${content}`;
+
+          const utterance = new SpeechSynthesisUtterance(message);
+          utterance.lang = "en-US";
+          speechSynthesis.speak(utterance);
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sports</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <h2 id="page2">Sports</h2>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search articles..."
+        onkeyup="searchArticles()"
+      />
+    </div>
+
+    <!-- Article 1 -->
+    <div class="news-card" data-id="sports-1">
+      <img
+        src="https://images.indianexpress.com/2025/05/IPL-review.jpg?w=640"
+        alt="IPL Review"
+        class="news-image"
+      />
+      <div class="news-content">
+        <h3>
+          IPL 2025: Rishabh Pant & Venkatesh Iyer fail to justify big prize tag,
+          Priyansh Arya & Digvesh Rathi are bargain buys
+        </h3>
+        <p class="article-text">
+          ‘Talent meets opportunity’ is the Indian Premier League’s motto, and
+          every season, hitherto unknown players become household names by the
+          end of the tournament...
+        </p>
+        <button class="read-btn">🔊 Read Aloud</button>
+      </div>
+      <div class="reaction-box">
+        <button class="reaction-btn like">👍 Like</button>
+        <button class="reaction-btn dislike">👎 Dislike</button>
+      </div>
+    </div>
+
+    <!-- Article 2 -->
+    <div class="news-card" data-id="sports-2">
+      <img
+        src="https://images.indianexpress.com/2025/05/neeraj-chopra-silver-at-paris-olympics.jpg?w=640"
+        alt="Neeraj Chopra"
+        class="news-image"
+      />
+      <div class="news-content">
+        <h3>
+          Neeraj Chopra: ‘Didn’t have very strong relationship with Arshad
+          Nadeem, as athletes, we have to talk’
+        </h3>
+        <p class="article-text">
+          Claiming that he ‘did not have a very strong relationship’ with the
+          reigning Olympic champion from Pakistan, Arshad Nadeem, Neeraj Chopra
+          said if anyone talks with him ‘respectfully’, he will reciprocate in
+          the same way.
+        </p>
+        <button class="read-btn">🔊 Read Aloud</button>
+      </div>
+      <div class="reaction-box">
+        <button class="reaction-btn like">👍 Like</button>
+        <button class="reaction-btn dislike">👎 Dislike</button>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          What is the focus of The Times of India news site?
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-answer">
+          We cover national and international news across categories like
+          sports, politics, business, technology, and entertainment with a
+          commitment to factual reporting.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          How often is the website updated? <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-answer">
+          The site is updated in real time as news breaks and stories are
+          published throughout the day.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Can I access older news articles? <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-answer">
+          Yes, you can browse through the archive or use the search feature to
+          find older news stories.
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+      <a href="index.html" class="back-link">🏠 Back to Home</a>
+      <a href="economics.html" class="back-link">📈 Go to Economics</a>
+      <a href="trending.html" class="back-link">🔥 Go to Trending</a>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // FAQ toggle
+        document.querySelectorAll(".faq-item").forEach((item) => {
+          const question = item.querySelector(".faq-question");
+          question.addEventListener("click", () => {
+            item.classList.toggle("active");
+          });
+        });
+
+        // Like/Dislike logic
+        document.querySelectorAll(".news-card").forEach((card) => {
+          const id = card.dataset.id;
+          const likeBtn = card.querySelector(".like");
+          const dislikeBtn = card.querySelector(".dislike");
+
+          likeBtn.addEventListener("click", () => {
+            likeBtn.classList.toggle("active");
+            dislikeBtn.classList.remove("active");
+            localStorage.setItem(
+              `${id}-like`,
+              likeBtn.classList.contains("active")
+            );
+            localStorage.removeItem(`${id}-dislike`);
+          });
+
+          dislikeBtn.addEventListener("click", () => {
+            dislikeBtn.classList.toggle("active");
+            likeBtn.classList.remove("active");
+            localStorage.setItem(
+              `${id}-dislike`,
+              dislikeBtn.classList.contains("active")
+            );
+            localStorage.removeItem(`${id}-like`);
+          });
+
+          if (localStorage.getItem(`${id}-like`) === "true") {
+            likeBtn.classList.add("active");
+          }
+
+          if (localStorage.getItem(`${id}-dislike`) === "true") {
+            dislikeBtn.classList.add("active");
+          }
+        });
+
+        // Read Aloud functionality
+        const synth = window.speechSynthesis;
+        const readButtons = document.querySelectorAll(".read-btn");
+
+        readButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const article =
+              btn.parentElement.querySelector(".article-text").innerText;
+            const utterance = new SpeechSynthesisUtterance(article);
+            synth.speak(utterance);
+          });
+        });
+      });
+
+      // Search functionality
+      function searchArticles() {
+        const input = document
+          .getElementById("search-input")
+          .value.toLowerCase();
+        const articles = document.querySelectorAll(".news-card");
+
+        articles.forEach((article) => {
+          const text = article.innerText.toLowerCase();
+          article.style.display = text.includes(input) ? "block" : "none";
+        });
+      }
+    </script>
+  </body>
+</html>

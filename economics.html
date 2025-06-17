@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Economics</title>
+    <link rel="stylesheet" href="styles2.css" />
+  </head>
+
+  <body>
+    <h2 id="page2">Economics</h2>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search articles..."
+        onkeyup="searchArticles()"
+      />
+    </div>
+
+    <!-- Article 1 -->
+    <div class="news-card-alt" data-id="eco-1">
+      <div class="news-img-alt">
+        <img
+          src="https://img.etimg.com/thumb/msid-121273898,width-300,height-225,imgsize-67732,resizemode-75/vikram-misri.jpg"
+          alt="Vikram Misri News"
+        />
+      </div>
+      <div class="news-right-alt">
+        <div class="news-text-alt">
+          <h2>
+            India-Pakistan conflict was always in conventional domain: Vikram
+            Misri to parliamentary panel
+          </h2>
+          <p class="article-text">
+            Foreign Secretary Vikram Misri told a parliamentary committee on
+            Monday that the conflict between India and Pakistan was always in
+            the conventional domain, and there was no nuclear signalling by the
+            neighbouring country, sources said.
+          </p>
+          <button class="read-btn">🔊 Read Aloud</button>
+        </div>
+        <div class="reaction-box">
+          <button class="reaction-btn like">👍 Like</button>
+          <button class="reaction-btn dislike">👎 Dislike</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Article 2 -->
+    <div class="news-card-alt" data-id="eco-2">
+      <div class="news-img-alt">
+        <img
+          src="https://img.etimg.com/thumb/msid-121262087,width-650,height-488,imgsize-2031436,resizemode-75/cms-27.jpg"
+          alt="Charles III News"
+        />
+      </div>
+      <div class="news-right-alt">
+        <div class="news-text-alt">
+          <h2>
+            A king's Ransom: The eye watering amount British taxpayers need to
+            pay to let Charles III live in style
+          </h2>
+          <p class="article-text">
+            British taxpayers are reportedly on the hook for a hefty sum to
+            support King Charles III’s regal lifestyle. The funding required to
+            maintain his residences and royal engagements has raised eyebrows
+            across the country, sparking debate over the monarchy’s costs in a
+            time of economic uncertainty.
+          </p>
+          <button class="read-btn">🔊 Read Aloud</button>
+        </div>
+        <div class="reaction-box">
+          <button class="reaction-btn like">👍 Like</button>
+          <button class="reaction-btn dislike">👎 Dislike</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="faq-container">
+      <h2 class="faq-heading">Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Why are British taxpayers concerned about King Charles III’s expenses?
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            The reported costs for maintaining King Charles III’s lifestyle are
+            significantly high, prompting concern over public spending during
+            economic constraints.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What did Vikram Misri clarify about India-Pakistan conflict?
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Foreign Secretary Vikram Misri confirmed to a parliamentary
+            committee that the India-Pakistan conflict has remained
+            conventional, with no nuclear signals from Pakistan.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back Navigation -->
+    <div class="back-link">
+      <a href="index.html" class="nav-btn">🏠 Back to Home</a>
+      <a href="sports.html" class="nav-btn">🏏 Go to Sports</a>
+      <a href="trending.html" class="nav-btn">🔥 Go to Trending</a>
+    </div>
+
+    <!-- Script -->
+    <script>
+      // FAQ toggle
+      document.querySelectorAll(".faq-question").forEach((button) => {
+        button.addEventListener("click", () => {
+          const answer = button.nextElementSibling;
+          const arrow = button.querySelector(".faq-arrow");
+          answer.classList.toggle("open");
+          arrow.classList.toggle("rotated");
+        });
+      });
+
+      // Like/Dislike
+      document.querySelectorAll(".news-card-alt").forEach((card) => {
+        const id = card.dataset.id;
+        const likeBtn = card.querySelector(".like");
+        const dislikeBtn = card.querySelector(".dislike");
+
+        likeBtn.addEventListener("click", () => {
+          likeBtn.classList.toggle("active");
+          dislikeBtn.classList.remove("active");
+          localStorage.setItem(
+            `${id}-like`,
+            likeBtn.classList.contains("active")
+          );
+          localStorage.removeItem(`${id}-dislike`);
+        });
+
+        dislikeBtn.addEventListener("click", () => {
+          dislikeBtn.classList.toggle("active");
+          likeBtn.classList.remove("active");
+          localStorage.setItem(
+            `${id}-dislike`,
+            dislikeBtn.classList.contains("active")
+          );
+          localStorage.removeItem(`${id}-like`);
+        });
+
+        if (localStorage.getItem(`${id}-like`) === "true") {
+          likeBtn.classList.add("active");
+        }
+
+        if (localStorage.getItem(`${id}-dislike`) === "true") {
+          dislikeBtn.classList.add("active");
+        }
+      });
+
+      // Search
+      function searchArticles() {
+        const input = document
+          .getElementById("search-input")
+          .value.toLowerCase();
+        const articles = document.querySelectorAll(".news-card-alt");
+
+        articles.forEach((article) => {
+          const text = article.innerText.toLowerCase();
+          article.style.display = text.includes(input) ? "flex" : "none";
+        });
+      }
+
+      // Voice Assist
+      const synth = window.speechSynthesis;
+      document.querySelectorAll(".read-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const text =
+            btn.parentElement.querySelector(".article-text").innerText;
+          const utter = new SpeechSynthesisUtterance(text);
+          synth.speak(utter);
+        });
+      });
+    </script>
+  </body>
+</html>
