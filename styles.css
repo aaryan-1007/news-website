@@ -108,12 +108,13 @@ body {
 
 .news-article {
   display: flex;
+  flex-direction: row;
   gap: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 20px;
+  overflow: hidden;
 }
 
 .news-article img {
@@ -241,8 +242,8 @@ body {
 }
 
 .faq-arrow {
-  transition: transform 0.3s ease;
   font-size: 0.8rem;
+  transition: transform 0.3s ease;
 }
 
 .faq-item.active .faq-arrow {
@@ -384,4 +385,5 @@ body.fade-out {
     padding: 20px;
   }
 }
+
 
