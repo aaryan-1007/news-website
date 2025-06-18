@@ -1,46 +1,46 @@
+/* General body styling */
 body {
   margin: 0;
   padding: 0;
   background-color: #f0f0f0;
-  background-image: radial-gradient(
-      circle at 1px 1px,
-      rgba(180, 180, 180, 0.6) 1px,
-      transparent 0
-    ),
+  background-image: radial-gradient(circle at 1px 1px, rgba(180, 180, 180, 0.6) 1px, transparent 0),
     linear-gradient(to bottom, #ffffff, #e8e8e8);
   background-size: 18px 18px, 100% 100%;
   font-family: Arial, sans-serif;
   color: #222;
 }
+
+/* Title */
 #first {
-  font-family: "Georgia", serif; /* classic newspaper vibe */
+  font-family: "Georgia", serif;
   font-weight: bold;
   font-size: 3.5rem;
-  color: #0a1a40; /* deep navy blue */
+  color: #0a1a40;
   text-align: center;
-  letter-spacing: 2px; /* spacing between letters */
+  letter-spacing: 2px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   margin: 20px 0 10px 0;
   text-transform: uppercase;
 }
 
+/* Date Badge */
 #date {
   text-align: right;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 400;
   font-size: 1.1rem;
   color: #444;
-  background-color: #e9ecef; /* soft light gray background */
-  display: inline-block; /* shrink to content width */
-  padding: 6px 12px;
+  background-color: #e9ecef;
+  display: inline-block;
+  padding: 6px 15px;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   margin: 0 20px 20px 0;
   user-select: none;
   letter-spacing: 0.5px;
-  padding-left: 15px;
 }
 
+/* Menu Styling */
 .sections-menu {
   text-align: center;
   margin: 20px 0;
@@ -52,6 +52,7 @@ body {
   margin: 0;
   display: inline-flex;
   gap: 30px;
+  flex-wrap: wrap;
 }
 
 .section-item a {
@@ -59,53 +60,44 @@ body {
   align-items: center;
   gap: 5px;
   font-weight: 600;
-  font-family: Arial, sans-serif;
   font-size: 1.1rem;
   color: #222;
   text-decoration: none;
   cursor: pointer;
-  transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-  user-select: none;
-
-  padding: 8px 16px; /* add padding for box size */
-  border: 2px solid transparent; /* border for smooth hover transition */
-  border-radius: 20px; /* smooth rounded corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* subtle shadow */
-  background-color: #f9f9f9; /* subtle background */
+  transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+  padding: 8px 16px;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: #f9f9f9;
 }
 
 .section-item a:hover {
   color: #0077cc;
-  border-color: #0077cc; /* change border on hover */
-  background-color: #e6f0fa; /* light blue background on hover */
-  box-shadow: 0 4px 12px rgba(0, 119, 204, 0.25); /* stronger shadow on hover */
+  border-color: #0077cc;
+  background-color: #e6f0fa;
+  box-shadow: 0 4px 12px rgba(0, 119, 204, 0.25);
+}
+
+.arrow {
+  font-size: 0.75rem;
+  transition: transform 0.3s ease;
+  user-select: none;
 }
 
 .section-item a:hover .arrow {
   transform: rotate(180deg);
 }
 
-.arrow {
-  display: inline-block;
-  font-size: 0.75rem;
-  transition: transform 0.3s ease;
-  user-select: none;
-}
-
-hr {
-  border: none;
-  height: 2px;
-  background-color: #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-}
-#page {
-  font-family: Impact, Charcoal, sans-serif;
-  padding-left: 15px;
+/* Headlines */
+#page, #page2 {
   text-align: center;
+  font-family: Impact, Charcoal, sans-serif;
   font-size: 2rem;
   color: rgb(3, 3, 81);
 }
+
+/* News layout */
 .news-container {
   display: flex;
   flex-direction: column;
@@ -153,100 +145,57 @@ hr {
   font-size: 1rem;
 }
 
-.faq-section {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 0 20px;
-  font-family: Arial, sans-serif;
+/* Alternative news layout */
+.news-card-alt {
+  display: flex;
+  width: 90%;
+  margin: 30px auto;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  gap: 20px;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
-.faq-section h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 2rem;
-  color: #2c3e50;
+.news-img-alt {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.faq-item {
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
-}
-
-.faq-question {
-  background: none;
-  border: none;
+.news-img-alt img {
   width: 100%;
-  text-align: left;
-  padding: 15px 0;
-  font-size: 1.1rem;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.news-text-alt {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.news-text-alt h2 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
   font-weight: bold;
   color: #1a1a1a;
-  cursor: pointer;
-  outline: none;
-  transition: color 0.3s ease;
 }
 
-.faq-question:hover {
-  color: #0077cc;
-}
-
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out,
-    padding 0.5s ease-in-out;
-  opacity: 0;
-  padding: 0 10px;
+.news-text-alt p {
   font-size: 1rem;
   color: #444;
-}
-
-.faq-item.active .faq-answer {
-  opacity: 1;
-  padding: 10px;
-}
-body.fade-out {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.news-card {
-  display: flex;
-  flex-direction: row;
-  background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  margin: 30px auto;
-  width: 90%;
-  max-width: 1000px;
-}
-
-.news-image {
-  width: 50%;
-  object-fit: cover;
-  height: auto;
-}
-
-.news-content {
-  width: 50%;
-  padding: 20px;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
-
-.news-content h3 {
-  margin-top: 0;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #222;
-}
-
-.news-content p {
-  font-size: 1rem;
   line-height: 1.6;
-  color: #444;
 }
+
+/* FAQ Section */
 .faq-section {
   width: 90%;
   max-width: 900px;
@@ -255,7 +204,6 @@ body.fade-out {
   background-color: #ffffff;
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  font-family: "Segoe UI", sans-serif;
 }
 
 .faq-section h2 {
@@ -302,99 +250,8 @@ body.fade-out {
 .faq-item.active .faq-arrow {
   transform: rotate(180deg);
 }
-.back-link {
-  display: inline-block;
-  margin: 20px;
-  font-size: 1rem;
-  color: #004080;
-  text-decoration: none;
-  border: 1px solid #ccc;
-  padding: 8px 14px;
-  border-radius: 8px;
-  transition: background-color 0.3s;
-}
 
-.back-link {
-  display: inline-block;
-  padding: 10px 18px;
-  border-radius: 8px;
-  background-color: #ffffff;
-  color: #333333;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease,
-    transform 0.2s ease, color 0.3s ease;
-  cursor: pointer;
-  user-select: none;
-}
-
-.back-link:hover {
-  background-color: #e0e7ff; /* subtle light blue */
-  box-shadow: 0 6px 12px rgba(100, 100, 255, 0.3);
-  color: #1a3fcc; /* deeper blue */
-  transform: scale(1.05); /* slight zoom */
-}
-
-.back-link:active {
-  transform: scale(0.98); /* slight press effect */
-  box-shadow: 0 3px 7px rgba(100, 100, 255, 0.5);
-}
-#page2 {
-  text-align: center;
-  font-family: Impact, Charcoal, sans-serif;
-  font-size: 2rem;
-  color: rgb(3, 3, 81);
-}
-.news-card-alt {
-  display: flex;
-  width: 90%;
-  margin: 30px auto;
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  gap: 20px; /* space between image and text */
-  padding: 15px;
-  box-sizing: border-box;
-}
-
-.news-img-alt {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.news-img-alt img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-.news-text-alt {
-  flex: 1;
-  padding: 10px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.news-text-alt h2 {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-  font-weight: bold;
-  color: #1a1a1a;
-}
-
-.news-text-alt p {
-  font-size: 1rem;
-  color: #444;
-  line-height: 1.6;
-}
+/* Reaction Buttons */
 .reaction-box {
   display: flex;
   gap: 12px;
@@ -425,11 +282,13 @@ body.fade-out {
   background-color: #1a3fcc;
   color: #fff;
 }
+
+/* Search Bar */
 .search-bar {
   display: flex;
   justify-content: flex-end;
   padding: 10px 20px;
-  margin-right: 30px; /* Shifts the bar slightly more to the right */
+  margin-right: 30px;
 }
 
 #search-input {
@@ -452,18 +311,82 @@ body.fade-out {
   border-color: #1a3fcc;
   box-shadow: 0 0 8px rgba(26, 63, 204, 0.3);
 }
-.read-btn {
-  margin-top: 10px;
-  background-color: #1e90ff;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 14px;
+
+/* Back link button */
+.back-link {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #333333;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  user-select: none;
 }
 
-.read-btn:hover {
-  background-color: #0d6efd;
+.back-link:hover {
+  background-color: #e0e7ff;
+  box-shadow: 0 6px 12px rgba(100, 100, 255, 0.3);
+  color: #1a3fcc;
+  transform: scale(1.05);
 }
+
+.back-link:active {
+  transform: scale(0.98);
+  box-shadow: 0 3px 7px rgba(100, 100, 255, 0.5);
+}
+
+/* Fade-out effect */
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Make entire site responsive */
+@media screen and (max-width: 768px) {
+  .news-article,
+  .news-card,
+  .news-card-alt {
+    flex-direction: column;
+  }
+
+  .news-article img,
+  .news-image,
+  .news-img-alt,
+  .news-text,
+  .news-content,
+  .news-text-alt {
+    width: 100%;
+  }
+
+  #first {
+    font-size: 2.2rem;
+  }
+
+  .section-item a {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+
+  .search-bar {
+    justify-content: center;
+    margin-right: 0;
+  }
+
+  #search-input {
+    width: 90%;
+    background-position: right 16px center;
+  }
+
+  .faq-question {
+    font-size: 1rem;
+  }
+
+  .faq-section {
+    padding: 20px;
+  }
+}
+
