@@ -467,4 +467,115 @@ body.fade-out {
 .read-btn:hover {
   background-color: #0d6efd;
 }
+/* ======== RESPONSIVE STYLES ======== */
+
+@media (max-width: 1024px) {
+  .news-article,
+  .news-card,
+  .news-card-alt {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .news-article img,
+  .news-image,
+  .news-img-alt img {
+    width: 100%;
+    height: auto;
+  }
+
+  .news-text,
+  .news-content,
+  .news-text-alt {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .reaction-box {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .sections-menu ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  #first {
+    font-size: 2.5rem;
+  }
+
+  #page,
+  #page2 {
+    font-size: 1.5rem;
+  }
+
+  .news-text h2,
+  .news-text-alt h2,
+  .news-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .news-text p,
+  .news-text-alt p,
+  .news-content p {
+    font-size: 0.95rem;
+  }
+
+  .faq-section {
+    padding: 20px;
+  }
+
+  .faq-section h2 {
+    font-size: 1.5rem;
+  }
+
+  #search-input {
+    width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sections-menu ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .section-item a {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+
+  #date {
+    font-size: 0.95rem;
+    padding: 5px 10px;
+  }
+
+  #search-input {
+    width: 150px;
+    font-size: 13px;
+    background-size: 14px;
+    background-position: right 10px center;
+  }
+
+  .read-btn {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+
+  .reaction-btn {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+  }
+
+  .back-link {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
+
 
